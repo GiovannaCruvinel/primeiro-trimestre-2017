@@ -6,7 +6,12 @@ public class PranchaMove : MonoBehaviour {
     public float limite;
     public float retorno;
 
-	void Start () {
+    public AudioClip somMorte;
+    private AudioSource audioSource;
+    private Animator anim;
+    private Rigidbody rb;
+
+    void Start () {
 		
 	}
 	
@@ -20,4 +25,20 @@ public class PranchaMove : MonoBehaviour {
             transform.localPosition = new Vector3(retorno, transform.localPosition.y, transform.localPosition.z);
         }
 	}
+
+    void OnCollisionEnter(Collision outro)
+    {
+        if (GameController.instancia.estado == Estado.Jogando)
+        {
+            if (outro.gameObject.tag == "obstaculo")
+            {
+                rb.velocity = Vector3.zero;
+                rb.AddForce(new Vector3(-50f, 20f, 0f), ForceMode.Impulse);
+                rb.detectCollisions = false;
+                anim.Play("morrendo");
+                audioSource.PlayOneShot(somMorte);
+                GameController.instancia.PlayerMorreu();
+            }
+        }
+    }
 }
