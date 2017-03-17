@@ -20,11 +20,11 @@ public class Morcego : MonoBehaviour {
 
     IEnumerator Move(float destino)
     {
-        while (Mathf.Abs(destino - transform.localPosition.y) > 0.2f)
+        while (Mathf.Abs(destino - transform.position.y) > 0.2f)
         {
             Vector3 direcao = (destino == max) ? Vector3.up : Vector3.down;
             Vector3 velocidadeVetorial = direcao * velocidade;
-            transform.localPosition = transform.localPosition + velocidadeVetorial * Time.deltaTime;
+            transform.position = transform.position + velocidadeVetorial * Time.deltaTime;
             yield return null;
         }
         yield return new WaitForSeconds(espera);
@@ -36,8 +36,8 @@ public class Morcego : MonoBehaviour {
 		void Update () {
         Vector3 velocidadeVectorial1 = Vector3.left * velocidade2;
 
-        transform.localPosition = transform.localPosition + velocidadeVectorial1 * Time.deltaTime;
+        transform.position = transform.position + velocidadeVectorial1 * Time.deltaTime;
 
          
 	}
-		}
+}
